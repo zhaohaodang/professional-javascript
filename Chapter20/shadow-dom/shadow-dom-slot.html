@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="foo">
+      <p>hello</p>
+      <!-- 下面两行是命名槽位，会分别替换 <slot name="foo"></slot><slot name="bar"></slot>-->
+      <p slot="foo">hello-foo</p>
+      <p slot="bar">hello-bar</p>
+    </div>
+
+    <script>
+      // 影子DOM会优先渲染，如果执行以下代码，1秒钟之后，div会变空白
+      //   setTimeout(
+      //     () => document.getElementById("foo").attachShadow({ mode: "open" }),
+      //     1000
+      //   );
+
+      // <p>hello</p> 元素会替换 <slot></slot>
+      document.getElementById("foo").attachShadow({
+        mode: "open",
+      }).innerHTML = `<div id="bar"><slot></slot>Mr Wang<slot name="bar"></slot><slot name="foo"></slot><div>`;
+    </script>
+  </body>
+</html>

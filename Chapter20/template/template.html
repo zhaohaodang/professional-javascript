@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- template 标签里的内容不会渲染到页面上  -->
+    <!-- document.querySelector()等 DOM 查询方法不会发现其中的<p>标签。-->
+    <template id="foo">
+      <p>I'm inside a template!</p>
+    </template>
+
+    <script>
+      // 通过<template>元素的 content 属性可以取得这个 DocumentFragment 的引用
+      const fragment = document.querySelector("#foo").content;
+      console.log(document.querySelector("p")); // null
+      console.log(fragment.querySelector("p")); // <p>I'm inside a template!</p>
+    </script>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 向div元素中插入三个p元素 -->
+    <div id="foo">hell2o</div>
+    <script>
+      var foo = document.getElementById("foo");
+      var fragment = new DocumentFragment();
+      fragment.appendChild(document.createElement("p"));
+      fragment.appendChild(document.createElement("p"));
+      fragment.appendChild(document.createElement("p"));
+      console.log(fragment.children.length); // 3
+      foo.appendChild(fragment);
+      console.log(fragment.children.length); // 0
+    </script>
+  </body>
+</html>

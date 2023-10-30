@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>一个简单的富文本编辑器</title>
+  </head>
+  <style>
+    #editor {
+      height: 400px;
+      border: 1px solid;
+      overflow: scroll;
+    }
+  </style>
+  <body>
+    <button id="edit1">加粗</button>
+    <button id="edit2">设为红色</button>
+    <input type="file" id="edit3" hidden />
+    <button><label for="edit3">插入图片</label></button>
+    <div id="editor" contenteditable="true"></div>
+    <script>
+      console.log("111");
+      document.getElementById("edit1").addEventListener("click", function () {
+        document.execCommand("bold", false, null);
+      });
+
+      document.getElementById("edit2").addEventListener("click", function () {
+        document.execCommand("forecolor", false, "#FF1744");
+      });
+      document
+        .getElementById("edit3")
+        .addEventListener("change", function (event) {
+          const reader = new FileReader();
+          if (event.target.files[0]) {
+            reader.readAsDataURL(event.target.files[0]);
+            reader.onload = function () {
+              document.execCommand("insertimage", false, reader.result);
+            };
+          }
+        });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="bar" onclick="console.log('Handled outside:', event.target)"></div>
+    <script>
+      var barElement = document.getElementById("bar");
+      var openShadowDOM = barElement.attachShadow({ mode: "open" });
+      openShadowDOM.innerHTML = `<button onclick="console.log('Handled inside:', event.target)">Bar</button>`;
+    </script>
+  </body>
+</html>

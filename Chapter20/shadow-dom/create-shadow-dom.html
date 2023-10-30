@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="foo"></div>
+    <script>
+      // 影子 DOM 是通过 attachShadow()方法创建并添加给有效 HTML 元素的。容纳影子 DOM 的元素 被称为影子宿主（shadow host）。影子 DOM 的根节点被称为影子根（shadow root）。
+      var foo = document.getElementById("foo");
+      // attachShadow不可以重复调用
+      var openShadowDOM = foo.attachShadow({ mode: "open" });
+      openShadowDOM.innerHTML = `
+          <p>hello</p>
+          <style>
+              p{
+              color: red;
+              }
+          </style>
+      `;
+    </script>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <x-foo> hello </x-foo>
+    <div id="foo"></div>
+    <!-- 使用is属性将div标签替换为自定义元素的实例 -->
+    <div is="x-bar"></div>
+    <!-- 这里要实现一个将文字渲染为红色的自定义元素 -->
+    <red-text>red text</red-text>
+    <script>
+      // 调用 customElements.define()方法可以创建自定义元素
+      class FooElement extends HTMLElement {
+        constructor() {
+          super();
+          console.log("x-foo");
+        }
+      }
+      customElements.define("x-foo", FooElement);
+      document.getElementById("foo").innerHTML = `<x-foo>hello2</x-foo>`;
+      // 如果自定义属性继承自一个元素类，比如div元素，可以使用is属性金和extends选项，将div标签指定为自定义元素的实例。
+      class BarElement extends HTMLDivElement {
+        constructor() {
+          super();
+          console.log("x-bar");
+        }
+      }
+      customElements.define("x-bar", BarElement, { extends: "div" });
+      // 这里要实现一个将文字渲染为红色的自定义元素
+      customElements.define(
+        "red-text",
+        class extends HTMLElement {
+          constructor() {
+            super();
+            this.attachShadow({
+              mode: "open",
+            }).innerHTML = `<p><slot></slot></p><style>p{color:red}</style>`;
+          }
+        }
+      );
+    </script>
+  </body>
+</html>
